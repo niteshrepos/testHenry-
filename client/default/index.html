@@ -29,7 +29,29 @@ a new app to the app store.
 </script>
 <script>
 $("#getMe").click(function(){
- alert("hello1")
+   $fh.auth({
+      "policyId": "FH example",
+      "clientToken": "gNJKYAqikWX-FN1eeYOerbMk",
+      "endRedirectUrl": window.location.href,
+      "params": {
+        "userId": "user",
+        "password": "pass"
+      }
+   }, function(res) {
+       // Authentication successful - store sessionToken in variable
+      var sessionToken = res.sessionToken;
+      result.innerHTML = 'Login Successful!';
+   }, function(msg, err) {
+      var errorMsg = err.message;
+      if (errorMsg === "user_purge_data" || errorMsg === "device_purge_data") {
+        // User or device has been black listed from administration console and all local data should be wiped
+        localStorage.clear();
+      } else {
+       console.log(err)
+        //alert("Authentication failed - " + errorMsg);
+      }
+  });
+ return false;
 })
 </script>
 
