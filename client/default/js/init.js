@@ -26,6 +26,6 @@ $fh.ready(function() {
     );
   };
   $("#getMe").click(function(){
-    alertt("hello")
+  alert("hello")
   })
 });
